@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>res/arrow-down-circle-line.png</file>
+        <file>res/arrow-up-circle-line.png</file>
+        <file>res/close-circle-line.png</file>
+    </qresource>
+</RCC>
