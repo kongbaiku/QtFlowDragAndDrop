@@ -8,4 +8,4 @@ QT流式窗口拖曳Demo<br><br>
 
 稍微修改了一下程序代码，主要是图标和效果展示方面，添加了一些属于个人理解的注释。
 
-![演示1](https://github.com/kongbaiku/QtFlowDragAndDrop/blob/main/gif/example.gif)<br><br>
+![演示12](https://github.com/kongbaiku/QtFlowDragAndDrop/blob/main/gif/example.gif)<br><br>
