@@ -2,7 +2,7 @@
 
 QT流式窗口拖曳Demo<br><br>
 
-最近在做一个类似IOS快捷指令的程序，流式步骤框架搭建方面一直没啥思路，找到了毛子老哥[Demonist](https://github.com/Demonist)的程序demo，属实救我狗命。
+最近在做一个类似IOS快捷指令的程序，流式步骤框架搭建方面一直没啥思路，找到了老哥[Demonist](https://github.com/Demonist)的程序demo，属实救我狗命。
 
 @Demonist，Большое спасибо（万分感谢）！<br><br>
 
