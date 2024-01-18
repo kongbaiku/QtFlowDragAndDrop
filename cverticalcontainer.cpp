@@ -26,7 +26,7 @@ CVerticalContainer::CVerticalContainer(QWidget *parent) :
     }
 }
 
-//新增控件
+//新增容器
 void CVerticalContainer::appendWidget(QWidget *widget)
 {
 	CDragableContainer *container = new CDragableContainer(widget);
@@ -36,7 +36,7 @@ void CVerticalContainer::appendWidget(QWidget *widget)
 	_layout->addWidget(container);
 }
 
-//移除控件
+//移除容器
 void CVerticalContainer::removeWidget(QWidget *widget)
 {
     _layout->removeWidget(widget);
@@ -57,9 +57,14 @@ void CVerticalContainer::dragMoveEvent(QDragMoveEvent *event)
 {
 	QWidget::dragMoveEvent(event);
 
+    /**********************************************/
+    /* 此函数目的是更新拖动操作时临时示意线（框）所处位置 */
+    /**********************************************/
+
 	const int currentLineIndex = _layout->indexOf(&_dropLine);
 
 	QWidget *child = childAt(event->pos());
+
 	while(child && _layout->indexOf(child) == -1)
 		child = child->parentWidget();
 
@@ -90,7 +95,8 @@ void CVerticalContainer::dragLeaveEvent(QDragLeaveEvent *event)
 {
 	QWidget::dragLeaveEvent(event);
 
-	if(QRect(QPoint(), size()).contains(mapFromGlobal(QCursor::pos()), false) == false)	//fix from wrong leave event.
+    //如果鼠标的位置离开了Widget，则移除并隐藏临时示意线（框）
+    if(QRect(QPoint(), this->size()).contains(mapFromGlobal(QCursor::pos()), false) == false)	//fix from wrong leave event.
 	{
 		_layout->removeWidget(&_dropLine);
 		_dropLine.hide();
@@ -98,10 +104,14 @@ void CVerticalContainer::dragLeaveEvent(QDragLeaveEvent *event)
 	}
 }
 
-//拖动事件
+//放置事件
 void CVerticalContainer::dropEvent(QDropEvent *event)
 {
 	QWidget::dropEvent(event);
+
+    /**********************************************/
+    /******** 此函数目的是更新拖动的容器所处位置 ********/
+    /**********************************************/
 
 	const QByteArray data = event->mimeData()->data(gDragableContainerMimeType);
 	CDragableContainer *dragingWidget = (CDragableContainer*)data.toULongLong();
@@ -117,6 +127,7 @@ void CVerticalContainer::dropEvent(QDropEvent *event)
 
 	_layout->removeWidget(&_dropLine);
 	_dropLine.hide();
+
 	event->acceptProposedAction();
 	event->accept();
 }
@@ -126,8 +137,9 @@ void CVerticalContainer::movingUp()
 {
 	CDragableContainer *container = static_cast<CDragableContainer*>( QObject::sender() );
 	const int index = _layout->indexOf(container);
-	if(index < 1)
-		QApplication::beep();
+
+    //操作有效则容器上移，无效则发出提示音
+    if(index < 1) QApplication::beep();
 	else
 	{
 		_layout->removeWidget(container);
@@ -140,8 +152,9 @@ void CVerticalContainer::movingDown()
 {
 	CDragableContainer *container = static_cast<CDragableContainer*>( QObject::sender() );
 	const int index = _layout->indexOf(container);
-	if(index < 0 || index >= _layout->count() - 1)
-		QApplication::beep();
+
+    //操作有效则容器下移，无效则发出提示音
+    if(index < 0 || index >= _layout->count() - 1) QApplication::beep();
 	else
 	{
 		_layout->removeWidget(container);

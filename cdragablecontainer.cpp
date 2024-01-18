@@ -46,6 +46,7 @@ bool CDragableContainer::eventFilter(QObject *object, QEvent *event)
             QDrag *drag = new QDrag(this);
             QMimeData *mimeData = new QMimeData;
 
+            //这里设置拖曳数据的类型和容器自身的指针
             const QByteArray data(QString::number((quintptr)this).toLatin1());
             mimeData->setData(gDragableContainerMimeType, data);
             drag->setMimeData(mimeData);

@@ -16,18 +16,18 @@ class CVerticalContainer : public QWidget
 
 public:
     explicit CVerticalContainer(QWidget *parent = 0);//构建
-    void appendWidget(QWidget *widget);//新增控件
+    void appendWidget(QWidget *widget);//新增容器
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event);//拖动进入事件
     void dragMoveEvent(QDragMoveEvent *event);//拖动移动事件
     void dragLeaveEvent(QDragLeaveEvent *event);//拖动离开事件
-    void dropEvent(QDropEvent *event);//拖动事件
+    void dropEvent(QDropEvent *event);//放置事件
 
 private slots:
     void movingUp();//上移
     void movingDown();//下移
-    void removeWidget(QWidget *widget);//移除控件
+    void removeWidget(QWidget *widget);//移除容器
 
 private:
     QVBoxLayout *_layout;

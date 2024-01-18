@@ -13,7 +13,7 @@ class CDragableContainer;
 }
 
 //const static QString gDragableContainerMimeType = "qapplication/dragableContainer";
-const static QString gDragableContainerMimeType = "随意填写";//可拖动容器标志
+const static QString gDragableContainerMimeType = "随意填写";//可拖动容器类型，这里用于判断是否接受拖动
 
 class CDragableContainer : public QWidget
 {
